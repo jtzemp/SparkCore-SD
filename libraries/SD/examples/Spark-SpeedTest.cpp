@@ -40,6 +40,7 @@ void error(const char* str)
 
 void setup() {
   Serial.begin(115200);
+  Serial.println("Type any character to initialize card");
   while (!Serial.available()) SPARK_WLAN_Loop();
   while (Serial.available()) Serial.read();
 
@@ -47,7 +48,7 @@ void setup() {
   // try SPI_HALF_SPEED if bus errors occur.
   // Initialize HARDWARE SPI with user defined chipSelect
   if (!card.init(SPI_FULL_SPEED, chipSelect)) error("card.init failed");
-  
+
   // Initialize SOFTWARE SPI
   //if (!card.init(mosiPin, misoPin, clockPin, chipSelect)) error("card.init failed");
 
@@ -60,11 +61,11 @@ void setup() {
   if (!root.openRoot(&volume)) error("openRoot failed");
 }
 
-void loop() { 
+void loop() {
   uint32_t t;
   double r;
 
-  Serial.println("Type any character to start");
+  Serial.println("Type any character to start test");
   while (!Serial.available()) SPARK_WLAN_Loop();
   while (Serial.available()) Serial.read();
 
